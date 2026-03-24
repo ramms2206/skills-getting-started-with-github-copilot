@@ -82,7 +82,7 @@ def test_root_redirect():
     # Arrange: No special setup needed
     
     # Act: Make GET request to root
-    response = client.get("/")
+    response = client.get("/", follow_redirects=False)
     
     # Assert: Check redirect response
     assert response.status_code == 307  # Temporary redirect

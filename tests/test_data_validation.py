@@ -62,6 +62,7 @@ def test_signup_beyond_max_participants():
     # Arrange: Fill up an activity to max participants, then add one more
     activity_name = "Tennis Club"
     max_participants = activities[activity_name]["max_participants"]  # 10
+    original_count = len(activities[activity_name]["participants"])  # 2
     
     # Add participants up to max
     for i in range(max_participants):
@@ -79,7 +80,7 @@ def test_signup_beyond_max_participants():
     # Verify total participants exceeds max
     response_check = client.get("/activities")
     data = response_check.json()
-    assert len(data[activity_name]["participants"]) == max_participants + 1
+    assert len(data[activity_name]["participants"]) == original_count + max_participants + 1
 
 
 def test_multiple_signups_different_activities():
